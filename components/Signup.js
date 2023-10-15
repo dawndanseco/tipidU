@@ -2,21 +2,23 @@ import { StyleSheet, Text, View, Image, TextInput, Pressable } from 'react-nativ
 import React, { useState } from 'react';
 
 export default function App() {
+    const [fullname, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [repassword, setRePassword] = useState('');
 
     return (
         <View style={styles.container}>
-            <Text style={styles.welcomeStyle}>Welcome!</Text>
-            <Text style={styles.textStyle}>
-                tipidU
-                <Image
-                    source={require('../assets/Logo.png')}
-                    style={styles.imageStyle}
+            <Text style={styles.signupStyle}>Sign up!</Text>
+            <View style={styles.signUpContainer}>
+            />
+                <View style={signUpContainer}> </View>
+                <TextInput
+                    style={styles.inputField}
+                    placeholder="Full Name"
+                    value={fullname}
+                    onChangeText={text => setFullName(text)}
                 />
-            </Text>
-            <View style={styles.loginContainer}>
-                <Text style={styles.loginLabel}>Login to your account</Text>
                 <TextInput
                     style={styles.inputField}
                     placeholder="Email"
@@ -30,6 +32,15 @@ export default function App() {
                     value={password}
                     onChangeText={text => setPassword(text)}
                 />
+                <TextInput
+                    style={styles.inputField}
+                    placeholder="Re-type Password"
+                    secureTextEntry={true}
+                    value={repassword}
+                    onChangeText={text => setRePassword(text)}
+                />
+                <Text> By signing up you accept the <Text style={styles.signupLink}> Terms of Service </Text> 
+                    and <Text style={styles.signupLink}> Privacy Policy</Text>. </Text>
                 <Pressable
                     style={({ pressed }) => [
                         {
@@ -42,14 +53,14 @@ export default function App() {
                 >
                     {({ pressed }) => (
                         <Text style={styles.loginButtonText}>
-                            {pressed ? 'Logging In...' : 'Log In'}
+                            {pressed ? 'Signing Up...' : 'Sign Up'}
                         </Text>
                     )}
                 </Pressable>
             </View>
             <View style={styles.signupContainer}>
                 <Text style={styles.signupText}>
-                    Don't have an account? <Text style={styles.signupLink}>Sign up</Text>
+                    Already have an account? <Text style={styles.signupLink}>Log in</Text>
                 </Text>
             </View>
             <StatusBar style="auto" />
@@ -65,38 +76,23 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         padding: 20,
     },
-    welcomeStyle: {
+    signupStyle: {
         color: 'black',
         fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 5,
     },
-    textStyle: {
-        color: '#3B4B69',
-        fontSize: 60,
-        fontStyle: 'italic',
-        textDecorationLine: 'underline',
-        fontWeight: 'bold',
-        marginTop: 20,
-    },
-    imageStyle: {
-        width: 70,
-        height: 70,
-        marginLeft: 10,
-    },
-    loginContainer: {
+    signUpContainer: {
         backgroundColor: '#B3D2DD',
-        flex: 1,
-        padding: 50,
-        borderRadius: 50,
-        marginTop: 150,
-        alignContent: 'center',
+        padding: 20,
+        borderRadius: 20,
+        marginTop: 20,
+        width: '80%',
     },
     loginLabel: {
         fontSize: 18,
         marginBottom: 5,
         fontWeight: 'bold',
-        alignContent: 'flex-start',
     },
     inputField: {
         height: 40,
@@ -106,12 +102,12 @@ const styles = StyleSheet.create({
         borderRadius: 13,
         paddingHorizontal: 10,
         marginBottom: 10,
-        marginTop: 10,
     },
     loginButton: {
         padding: 15,
         borderRadius: 13,
         alignItems: 'center',
+        backgroundColor: '#3B4B69',
     },
     loginButtonText: {
         color: 'white',
@@ -119,7 +115,6 @@ const styles = StyleSheet.create({
     },
     signupContainer: {
         marginTop: 20,
-        alignSelf: 'center', 
     },
     signupText: {
         fontSize: 16,
@@ -131,4 +126,3 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
-
